@@ -1,6 +1,9 @@
 package com.medeasy.pharmacymanagementsystem.repository;
 
+import com.medeasy.pharmacymanagementsystem.model.Medicine;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface MedicineRepository extends JpaRepository<Long, medicineId> {
+@Repository
+public interface MedicineRepository extends JpaRepository<Medicine, Long> {
 }
