@@ -1,15 +1,9 @@
-package com.medeasy.pharmacymanagementsystem.model;
-
-import jakarta.persistence.*;
+package com.medeasy.pharmacymanagementsystem.dto;
 
 import java.math.BigDecimal;
 
-@Entity
-public class Medicine {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class MedicineDto {
 
     private String medicineName;
 
@@ -18,14 +12,6 @@ public class Medicine {
     private BigDecimal medicinePrice;
 
     private Integer medicineQuantity;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long medicineId) {
-        this.id = id;
-    }
 
     public String getMedicineName() {
         return medicineName;
@@ -59,5 +45,3 @@ public class Medicine {
         this.medicineQuantity = medicineQuantity;
     }
 }
-
-
