@@ -32,13 +32,13 @@ public class MedicineController {
 //        return medicineService.addMedicine(medicine);
 //    }
 
-    @PostMapping
+    @PostMapping("/save")
     public ResponseEntity<Medicine> addMedicine(@RequestBody MedicineDto medicineDto){
         Medicine createdMedicine = medicineService.addMedicine(medicineDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdMedicine);
     }
 
-    @GetMapping
+    @GetMapping("/get/all")
     public List<Medicine> getAllMedicine() {
         return medicineService.getAllMedicine();
     }
@@ -50,14 +50,21 @@ public class MedicineController {
         return medicineService.getMedicineById(id);
     }*/
 
-    @GetMapping("/{id}")
+    @GetMapping("/get/{id}")
     public Medicine getMedicineById(@PathVariable Long id) {
         return medicineService.getMedicineById(id);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public String delete(@PathVariable Long id) {
         medicineService.deleteMedicine(id);
         return id + " number ids data is deleted";
     }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Medicine> update (@PathVariable Long id, @RequestBody MedicineDto medicineDto) {
+        Medicine s = medicineService.updateMedicine(id, medicineDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(s);
+    }
+
 }

@@ -47,14 +47,25 @@ public class MedicineService {
         return medicineRepository.findById(id);
     }*/
 
+    // find a medicine by id
     public Medicine getMedicineById(Long id) {
         return medicineRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Medicine not found"));
     }
 
+    // method for delete a medicine
     public void deleteMedicine(Long id) {
         medicineRepository.deleteById(id);
     }
+
+    // method for update medicine details if needed
+    public Medicine updateMedicine(Long id, MedicineDto medicineDto) {
+        Medicine existing = getMedicineById(id);
+        applyDto(existing, medicineDto);
+        return medicineRepository.save(existing);
+    }
+
+
 
 
 
