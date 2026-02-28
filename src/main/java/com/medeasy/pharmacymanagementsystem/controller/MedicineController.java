@@ -55,7 +55,9 @@ public class MedicineController {
         return medicineService.getMedicineById(id);
     }
 
-
-
-
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable Long id) {
+        medicineService.deleteMedicine(id);
+        return id + " number ids data is deleted";
+    }
 }

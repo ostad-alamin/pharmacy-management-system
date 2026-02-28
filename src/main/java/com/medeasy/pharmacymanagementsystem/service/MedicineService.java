@@ -52,6 +52,10 @@ public class MedicineService {
                 .orElseThrow(() -> new RuntimeException("Medicine not found"));
     }
 
+    public void deleteMedicine(Long id) {
+        medicineRepository.deleteById(id);
+    }
+
 
 
 
