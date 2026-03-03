@@ -67,4 +67,9 @@ public class MedicineController {
         return ResponseEntity.status(HttpStatus.CREATED).body(s);
     }
 
+    @GetMapping("/name/{medicineName}")
+    public ResponseEntity<List<Medicine>> searchByName(@PathVariable String medicineName){
+        return ResponseEntity.ok(medicineService.searchByName(medicineName));
+    }
+
 }

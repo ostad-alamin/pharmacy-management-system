@@ -65,6 +65,13 @@ public class MedicineService {
         return medicineRepository.save(existing);
     }
 
+    // method for search by name
+    public List<Medicine> searchByName(String medicineName){
+       return medicineRepository.findByMedicineName(medicineName);
+    }
+
+
+
 
 
 

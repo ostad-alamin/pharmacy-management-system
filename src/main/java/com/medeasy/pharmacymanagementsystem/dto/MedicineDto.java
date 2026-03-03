@@ -1,8 +1,11 @@
 package com.medeasy.pharmacymanagementsystem.dto;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import java.math.BigDecimal;
 
 
+@JsonPropertyOrder({"medicineName", "groupName", "medicinePrice", "medicineQuantity"})
 public class MedicineDto {
 
     private String medicineName;
