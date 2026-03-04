@@ -2,8 +2,11 @@ package com.medeasy.pharmacymanagementsystem.service;
 
 
 import com.medeasy.pharmacymanagementsystem.dto.MedicineDto;
+import com.medeasy.pharmacymanagementsystem.dto.MedicineResponseDto;
+import com.medeasy.pharmacymanagementsystem.dto.PurchaseRequestDto;
 import com.medeasy.pharmacymanagementsystem.model.Medicine;
 import com.medeasy.pharmacymanagementsystem.repository.MedicineRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +33,12 @@ public class MedicineService {
         medicine.setMedicineQuantity(medicineDto.getMedicineQuantity());
         medicine.setGroupName(medicineDto.getGroupName());
     }
+
+    /*public void applyResponseDto(Medicine medicine, MedicineResponseDto medicineResponseDto){
+        medicine.setMedicineName(medicineResponseDto.getMedicineName());
+        medicine.setMedicinePrice(medicineResponseDto.getMedicinePrice());
+        medicine.setGroupName(medicineResponseDto.getGroupName());
+    }*/
 
     // Create a medicine from the admin side
     public Medicine addMedicine(MedicineDto medicineDto){
@@ -70,8 +79,38 @@ public class MedicineService {
        return medicineRepository.findByMedicineName(medicineName);
     }
 
+    /*public List<MedicineDto> searchByName(String name) {
+        List<Medicine> medicines = medicineRepository.findByMedicineName(name);
+
+        return medicines.stream()
+                .map(this::applyDto)
+                .toList();
+    }*/
+
     public List<Medicine> searchByGroupName(String groupName) {
         return medicineRepository.findByGroupName(groupName);
     }
+
+
+    @Transactional
+    public Medicine purchaseMedicine(PurchaseRequestDto purchaseRequestDto){
+        Medicine medicine = medicineRepository.findById(purchaseRequestDto.getPurchaseId())
+                .orElseThrow(() -> new RuntimeException("Not found with this id"));
+
+        if (medicine.getMedicineQuantity() < purchaseRequestDto.getPurchaseQuantity()){
+            System.out.println("stock not available");
+        }
+
+
+        medicine.setMedicineQuantity(medicine.getMedicineQuantity() -
+                purchaseRequestDto.getPurchaseQuantity());
+
+        if (medicine.getMedicineQuantity() <= 5 && medicine.getMedicineQuantity() > 0){
+            System.out.println("stock is about to end");
+        }
+
+        return medicineRepository.save(medicine);
+    }
+
 
 }

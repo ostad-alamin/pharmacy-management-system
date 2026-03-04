@@ -2,6 +2,8 @@ package com.medeasy.pharmacymanagementsystem.controller;
 
 
 import com.medeasy.pharmacymanagementsystem.dto.MedicineDto;
+import com.medeasy.pharmacymanagementsystem.dto.MedicineResponseDto;
+import com.medeasy.pharmacymanagementsystem.dto.PurchaseRequestDto;
 import com.medeasy.pharmacymanagementsystem.model.Medicine;
 import com.medeasy.pharmacymanagementsystem.service.MedicineService;
 import org.springframework.http.HttpStatus;
@@ -76,4 +78,12 @@ public class MedicineController {
     public ResponseEntity<List<Medicine>> searchByGroupName(@PathVariable String groupName) {
         return ResponseEntity.ok(medicineService.searchByGroupName(groupName));
     }
+
+    @PostMapping("/purchase")
+    public ResponseEntity<Medicine> purchaseMedicine(@RequestBody PurchaseRequestDto purchaseRequestDto) {
+        Medicine medicine = medicineService.purchaseMedicine(purchaseRequestDto);
+        return ResponseEntity.ok(medicine);
+
+    }
 }
+
