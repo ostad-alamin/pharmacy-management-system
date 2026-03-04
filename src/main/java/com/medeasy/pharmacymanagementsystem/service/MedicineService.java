@@ -70,8 +70,8 @@ public class MedicineService {
        return medicineRepository.findByMedicineName(medicineName);
     }
 
-
-
-
+    public List<Medicine> searchByGroupName(String groupName) {
+        return medicineRepository.findByGroupName(groupName);
+    }
 
 }

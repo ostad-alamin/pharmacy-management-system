@@ -72,6 +72,9 @@ public class MedicineController {
         return ResponseEntity.ok(medicineService.searchByName(medicineName));
     }
 
-
+    @GetMapping("/group-name/{groupName}")
+    public ResponseEntity<List<Medicine>> searchByGroupName(@PathVariable String groupName) {
+        return ResponseEntity.ok(medicineService.searchByGroupName(groupName));
+    }
 
 }

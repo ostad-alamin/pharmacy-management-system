@@ -11,4 +11,5 @@ public interface MedicineRepository extends JpaRepository<Medicine, Long> {
 
     // search by first name
     List<Medicine> findByMedicineName(String medicineName);
+    List<Medicine> findByGroupName(String groupName);
 }
