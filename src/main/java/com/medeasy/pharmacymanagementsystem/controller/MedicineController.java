@@ -76,14 +76,4 @@ public class MedicineController {
     public ResponseEntity<List<Medicine>> searchByGroupName(@PathVariable String groupName) {
         return ResponseEntity.ok(medicineService.searchByGroupName(groupName));
     }
-    //new push
-
-    // Again push
-
-    //Learn GitHub Alamin
-
-    //Learn github jerry
-
-
-
 }
