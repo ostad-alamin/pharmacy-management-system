@@ -67,4 +67,8 @@ public class MedicineController {
         return ResponseEntity.status(HttpStatus.CREATED).body(s);
     }
 
+    @GetMapping("/name/{name}")
+
+
+
 }
