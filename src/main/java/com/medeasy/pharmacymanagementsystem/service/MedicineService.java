@@ -2,16 +2,13 @@ package com.medeasy.pharmacymanagementsystem.service;
 
 
 import com.medeasy.pharmacymanagementsystem.dto.MedicineDto;
-import com.medeasy.pharmacymanagementsystem.dto.MedicineResponseDto;
 import com.medeasy.pharmacymanagementsystem.dto.PurchaseRequestDto;
 import com.medeasy.pharmacymanagementsystem.model.Medicine;
 import com.medeasy.pharmacymanagementsystem.repository.MedicineRepository;
 import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class MedicineService {
@@ -24,7 +21,6 @@ public class MedicineService {
     public MedicineService(MedicineRepository medicineRepository){
         this.medicineRepository = medicineRepository;
     }
-
 
     // method to convert DTO to entity
     public void applyDto(Medicine medicine, MedicineDto medicineDto){
@@ -40,58 +36,52 @@ public class MedicineService {
         medicine.setGroupName(medicineResponseDto.getGroupName());
     }*/
 
-    // Create a medicine from the admin side
+    // Method for create medicine
     public Medicine addMedicine(MedicineDto medicineDto){
         Medicine medicine = new Medicine();
         applyDto(medicine, medicineDto);
         return medicineRepository.save(medicine);
     }
 
-    // method for get all medicine
-    public List<Medicine> getAllMedicine() {
-        return medicineRepository.findAll();
+    // Method for get all medicine
+    public List<Medicine> getAllMedicine(Integer quantity) {
+
+        if (quantity != null && quantity > 0) {
+            return medicineRepository.getAllMedicineQuantity(quantity);
+        } else {
+            return medicineRepository.findAll();
+        }
     }
 
-    /*public Optional<Medicine> getMedicineById(Long id){
-        return medicineRepository.findById(id);
-    }*/
-
-    // find a medicine by id
+    // Method for find a medicine by id
     public Medicine getMedicineById(Long id) {
         return medicineRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Medicine not found"));
     }
 
-    // method for delete a medicine
+    // Method for delete a medicine
     public void deleteMedicine(Long id) {
         medicineRepository.deleteById(id);
     }
 
-    // method for update medicine details if needed
+    // Method for update medicine
     public Medicine updateMedicine(Long id, MedicineDto medicineDto) {
         Medicine existing = getMedicineById(id);
         applyDto(existing, medicineDto);
         return medicineRepository.save(existing);
     }
 
-    // method for search by name
+    // Method for search by medicineName
     public List<Medicine> searchByName(String medicineName){
        return medicineRepository.findByMedicineName(medicineName);
     }
 
-    /*public List<MedicineDto> searchByName(String name) {
-        List<Medicine> medicines = medicineRepository.findByMedicineName(name);
-
-        return medicines.stream()
-                .map(this::applyDto)
-                .toList();
-    }*/
-
+    // Method for search by groupName
     public List<Medicine> searchByGroupName(String groupName) {
         return medicineRepository.findByGroupName(groupName);
     }
 
-
+    //Purchase method
     @Transactional
     public Medicine purchaseMedicine(PurchaseRequestDto purchaseRequestDto){
         Medicine medicine = medicineRepository.findById(purchaseRequestDto.getPurchaseId())
@@ -100,7 +90,6 @@ public class MedicineService {
         if (medicine.getMedicineQuantity() < purchaseRequestDto.getPurchaseQuantity()){
             System.out.println("stock not available");
         }
-
 
         medicine.setMedicineQuantity(medicine.getMedicineQuantity() -
                 purchaseRequestDto.getPurchaseQuantity());
@@ -111,6 +100,4 @@ public class MedicineService {
 
         return medicineRepository.save(medicine);
     }
-
-
 }
