@@ -6,7 +6,6 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 
-/// ////Change
 @Entity
 @JsonPropertyOrder({"id", "medicineName", "groupName", "medicinePrice", "medicineQuantity"})
 public class Medicine {
