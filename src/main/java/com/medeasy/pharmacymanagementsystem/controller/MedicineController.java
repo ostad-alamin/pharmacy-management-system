@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -34,6 +35,11 @@ public class MedicineController {
     @GetMapping("/get/all")
     public List<Medicine> getAllMedicine(@RequestParam(value = "quantity", required = false) Integer quantity) {
         return medicineService.getAllMedicine(quantity);
+    }
+
+    @GetMapping("/get/all/byPrice")
+    public List<Medicine> getAllMedicine(@RequestParam(value = "price", required = false) Long price) {
+        return medicineService.getAllMedicineByPrice(price);
     }
 
     // Get medicine by id

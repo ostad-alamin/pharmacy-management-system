@@ -8,6 +8,7 @@ import com.medeasy.pharmacymanagementsystem.repository.MedicineRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -30,12 +31,6 @@ public class MedicineService {
         medicine.setGroupName(medicineDto.getGroupName());
     }
 
-    /*public void applyResponseDto(Medicine medicine, MedicineResponseDto medicineResponseDto){
-        medicine.setMedicineName(medicineResponseDto.getMedicineName());
-        medicine.setMedicinePrice(medicineResponseDto.getMedicinePrice());
-        medicine.setGroupName(medicineResponseDto.getGroupName());
-    }*/
-
     // Method for create medicine
     public Medicine addMedicine(MedicineDto medicineDto){
         Medicine medicine = new Medicine();
@@ -45,13 +40,24 @@ public class MedicineService {
 
     // Method for get all medicine
     public List<Medicine> getAllMedicine(Integer quantity) {
-
-        if (quantity != null && quantity > 0) {
+        if(quantity != null && quantity > 0) {
             return medicineRepository.getAllMedicineQuantity(quantity);
-        } else {
+        }
+        else {
             return medicineRepository.findAll();
         }
     }
+
+
+    public List<Medicine> getAllMedicineByPrice(Long price) {
+        if(price != null && price > 0 ) {
+            return medicineRepository.getAllMedicineByPrice(price);
+        }
+        else {
+            return medicineRepository.findAll();
+        }
+    }
+
 
     // Method for find a medicine by id
     public Medicine getMedicineById(Long id) {
