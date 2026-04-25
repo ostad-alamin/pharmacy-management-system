@@ -50,9 +50,8 @@ public class MedicineController {
 
     //Delete medicine by id
     @DeleteMapping("/delete/{id}")
-    public String delete(@PathVariable Long id) {
+    public void delete(@PathVariable Long id) {
         medicineService.deleteMedicine(id);
-        return id + " Medicine Deleted";
     }
 
     // Update medicine by id and payload

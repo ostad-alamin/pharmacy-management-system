@@ -23,6 +23,7 @@ public interface MedicineRepository extends JpaRepository<Medicine, Long> {
     @Query(value = "SELECT * FROM Medicine WHERE medicine_quantity <= :quantity", nativeQuery = true)
     List<Medicine> getAllMedicineQuantity(@Param("quantity") Integer quantity);
 
+    // Search medicine by price (@Param ?price=500)
     @Query(value = "select * from Medicine WHERE medicine_price <= :price", nativeQuery = true)
     List<Medicine> getAllMedicineByPrice(@Param("price") Long price);
 }

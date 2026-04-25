@@ -1,10 +1,13 @@
 package com.medeasy.pharmacymanagementsystem.dto;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 
-
+@Getter
+@Setter
 @JsonPropertyOrder({"medicineName", "groupName", "medicinePrice", "medicineQuantity"})
 public class MedicineDto {
 
@@ -16,35 +19,4 @@ public class MedicineDto {
 
     private Integer medicineQuantity;
 
-    public String getMedicineName() {
-        return medicineName;
-    }
-
-    public void setMedicineName(String medicineName) {
-        this.medicineName = medicineName;
-    }
-
-    public String getGroupName() {
-        return groupName;
-    }
-
-    public void setGroupName(String groupName) {
-        this.groupName = groupName;
-    }
-
-    public BigDecimal getMedicinePrice() {
-        return medicinePrice;
-    }
-
-    public void setMedicinePrice(BigDecimal medicinePrice) {
-        this.medicinePrice = medicinePrice;
-    }
-
-    public Integer getMedicineQuantity() {
-        return medicineQuantity;
-    }
-
-    public void setMedicineQuantity(Integer medicineQuantity) {
-        this.medicineQuantity = medicineQuantity;
-    }
 }

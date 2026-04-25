@@ -94,14 +94,14 @@ public class MedicineService {
                 .orElseThrow(() -> new RuntimeException("Not found with this id"));
 
         if (medicine.getMedicineQuantity() < purchaseRequestDto.getPurchaseQuantity()){
-            System.out.println("stock not available");
+            System.err.println("stock not available");
         }
 
         medicine.setMedicineQuantity(medicine.getMedicineQuantity() -
                 purchaseRequestDto.getPurchaseQuantity());
 
         if (medicine.getMedicineQuantity() <= 5 && medicine.getMedicineQuantity() > 0){
-            System.out.println("stock is about to end");
+            System.err.println("stock is about to end");
         }
 
         return medicineRepository.save(medicine);
