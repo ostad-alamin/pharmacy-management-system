@@ -28,7 +28,7 @@ public class MedicineController {
     @PostMapping("/save")
     public ResponseEntity<Medicine> addMedicine(@RequestBody MedicineDto medicineDto){
         Medicine createdMedicine = medicineService.addMedicine(medicineDto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdMedicine);
+        return ResponseEntity.ok(createdMedicine);
     }
 
     // Get all medicine
